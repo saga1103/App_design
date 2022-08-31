@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/drawable/progress.xml" value="0.216" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/drawable/progress_bar.xml" value="0.217" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/drawable/progress_bar_background.xml" value="0.216" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/faragment_btn4.xml" value="0.21875" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_btn1.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_btn2.xml" value="0.25" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_btn3.xml" value="0.1875" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_btn4.xml" value="0.21875" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_btn5.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/fragment_line1.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/layout/issue.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/rvlab/AndroidStudioProjects/Test_t1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3651041666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.15384615384615385" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
