@@ -1,6 +1,9 @@
 package com.example.test_t1;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,8 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -30,6 +36,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -51,7 +58,6 @@ public class button1Fragment extends Fragment
     private  List list_csv;
 
     ArrayList<issue_data> issueDataList;
-    MainActivity mainActivity ;
     private boolean is_item= false;
     int i;
     int last_index;
@@ -75,7 +81,6 @@ public class button1Fragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState)
     {
-        System.out.println("1번 프래그먼트실행");
         issueDataList = new ArrayList<issue_data>();
         i=0;
         if(getArguments() != null)
@@ -90,16 +95,19 @@ public class button1Fragment extends Fragment
         //이슈데이터리스트를 받아서 체크
         myAdapter = new MyAdapter(getContext(),issueDataList);
         listView.setAdapter(myAdapter);
-        mainActivity = new MainActivity();
         Read_csv read_csv = new Read_csv();
-        csv_list = read_csv.readCSV();
-        list_csv = (List) csv_list.get(0);
 
+//        String path ="/data/user/0/com.example.test_t1/files/sample1.csv"; //애뮬레이터 경로 이건 해당파일이 없어서나는오류 ,이거폰에서 파일넣을방법이 없는듯 엑세스가 안댐
+        // 휴대폰 경로
+        String path ="/storage/emulated/0/Download/KakaoTalk/sample1.csv"; //그냥 매니패스트파일에서 선언제대로 안해서 생긴오류..
+//        String path = "/storage/emulated/0/Android/media/sample1.csv";
+
+        csv_list = read_csv.readCSV(path);
+
+        list_csv = (List) csv_list.get(0);
         //전체 사이즈
         last_index = list_csv.size();
         iter_csv= list_csv.iterator();
-
-
         bottomNavigationView = view.findViewById(R.id.nav_view);
 
 
@@ -113,8 +121,9 @@ public class button1Fragment extends Fragment
             bundle.putString("line", myAdapter.getItem(position).getFac_line());
             btn2Fragment = new button2Fragment();
             btn2Fragment.setArguments(bundle);
-            Navigation.findNavController(view).navigate(R.id.action_navigation_btn1_to_navigation_btn2,bundle); //controller
-
+//            Navigation.findNavController(view).navigate(R.id.action_navigation_btn1_to_navigation_btn2,bundle);//요건 해당 화면에서 새화면넘어갈때 사용함
+                MainActivity mainActivity = new MainActivity();
+                mainActivity.selected3();
                 //navigate()는 호출되면 호출대상을 스택맨위에 올려놓음
                 //navigate()로 이동되면 뒤로가기를 해야 NavController.navigateup(), NavController.popBackStack()메서드가 호출되어 스택최상단대상을 삭제 함.
                 //navigate()말고 , 버튼누른작용

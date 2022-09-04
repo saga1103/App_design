@@ -38,5 +38,11 @@
         android:label="button4"
         tools:layout="@layout/fragment_btn4"
         />
+    <fragment
+        android:id="@+id/navigation_btn5"
+        android:name="com.example.test_t1.button5Fragment"
+        android:label="button5"
+        tools:layout="@layout/fragment_btn5"
+        />
 
 </navigation>

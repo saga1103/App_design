@@ -11,9 +11,10 @@ public class Read_csv
 //        csvReader.readCSV();
     }
 
-    public List<List<String>> readCSV() {
+    public List<List<String>> readCSV(String path) {
         List<List<String>> csvList = new ArrayList<List<String>>();
-        File csv = new File("/data/user/0/com.example.test_t1/files/sample1.csv"); //절대경로로 파일을 가져와야하는데
+        File csv = new File(path);
+        System.out.println("csv파일리스트임"+csv);
         BufferedReader br = null;
         String line = "";
 

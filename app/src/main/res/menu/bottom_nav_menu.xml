@@ -12,9 +12,11 @@
         android:title="공장라인"
         android:icon="@drawable/ic_launcher_foreground"
         />
+
     <item
         android:title="설비현황"
         android:icon="@drawable/ic_launcher_foreground"
         android:id ="@+id/navigation_btn4"
         />
+
 </menu>

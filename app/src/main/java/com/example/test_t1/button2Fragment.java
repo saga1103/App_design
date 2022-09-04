@@ -26,6 +26,8 @@ import com.example.test_t1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
+
 public class button2Fragment extends Fragment
 {
     private String fac_line;

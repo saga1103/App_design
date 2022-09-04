@@ -42,14 +42,16 @@ public class button3Fragment extends Fragment {
                              @Nullable Bundle savedInstanceState)
     {
         System.out.println("3번 프래그먼트실행");
-        i=0;
-        issueDataList = new ArrayList<issue_data>();
+
 
 
 
         view = inflater.inflate(R.layout.fragment_btn3,container,false);
 
+
         //차트코드
+        i=0;
+        issueDataList = new ArrayList<issue_data>();
         chart = (LineChart) view.findViewById(R.id.data_chart);
         chart.setDrawGridBackground(true);
         chart.setBackgroundColor(Color.WHITE);
