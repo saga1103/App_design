@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_btn1"
         android:name="com.example.test_t1.button1Fragment"
-        android:label="button1"
+        android:label="실시간확인창"
         tools:layout="@layout/fragment_btn1" >
         <action
             android:id="@+id/action_navigation_btn1_to_navigation_btn2"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/navigation_btn2"
         android:name="com.example.test_t1.button2Fragment"
-        android:label="button2"
+        android:label="공장라인"
         tools:layout="@layout/fragment_btn2" >
         <action
             android:id="@+id/action_navigation_btn2_to_navigation_btn3"
@@ -30,12 +30,13 @@
         android:id="@+id/navigation_btn3"
         android:name="com.example.test_t1.button3Fragment"
         android:label="button3"
-        tools:layout="@layout/fragment_btn3" />
+        tools:layout="@layout/fragment_btn3"
+        />
 
     <fragment
         android:id="@+id/navigation_btn4"
         android:name="com.example.test_t1.button4Fragment"
-        android:label="button4"
+        android:label="설비현황"
         tools:layout="@layout/fragment_btn4"
         />
     <fragment

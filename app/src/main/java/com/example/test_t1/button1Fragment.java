@@ -22,7 +22,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -66,6 +70,10 @@ public class button1Fragment extends Fragment
     Handler handler;
     Thread data_run;
     BottomNavigationView bottomNavigationView;
+    MainActivity mainActivity;
+    BottomNavigationView navigationView;
+    Bundle bundle_line;
+
 
     @Override
     public void onStop()
@@ -81,7 +89,11 @@ public class button1Fragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState)
     {
+
+
+        mainActivity= new MainActivity();
         issueDataList = new ArrayList<issue_data>();
+
         i=0;
         if(getArguments() != null)
         {
@@ -90,6 +102,7 @@ public class button1Fragment extends Fragment
             i= bundle.getInt("cur_index");
         }
         view = inflater.inflate(R.layout.fragment_btn1,container,false);
+        navigationView = view.findViewById(R.id.nav_view);
         listView = (ListView) view.findViewById(R.id.listview);
         handler = new Handler();
         //이슈데이터리스트를 받아서 체크
@@ -97,9 +110,9 @@ public class button1Fragment extends Fragment
         listView.setAdapter(myAdapter);
         Read_csv read_csv = new Read_csv();
 
-//        String path ="/data/user/0/com.example.test_t1/files/sample1.csv"; //애뮬레이터 경로 이건 해당파일이 없어서나는오류 ,이거폰에서 파일넣을방법이 없는듯 엑세스가 안댐
+        String path ="/data/user/0/com.example.test_t1/files/sample1.csv"; //애뮬레이터 경로 이건 해당파일이 없어서나는오류 ,이거폰에서 파일넣을방법이 없는듯 엑세스가 안댐
         // 휴대폰 경로
-        String path ="/storage/emulated/0/Download/KakaoTalk/sample1.csv"; //그냥 매니패스트파일에서 선언제대로 안해서 생긴오류..
+//        String path ="/storage/emulated/0/Download/KakaoTalk/sample1.csv"; //그냥 매니패스트파일에서 선언제대로 안해서 생긴오류..
 //        String path = "/storage/emulated/0/Android/media/sample1.csv";
 
         csv_list = read_csv.readCSV(path);
@@ -108,7 +121,7 @@ public class button1Fragment extends Fragment
         //전체 사이즈
         last_index = list_csv.size();
         iter_csv= list_csv.iterator();
-        bottomNavigationView = view.findViewById(R.id.nav_view);
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -117,16 +130,32 @@ public class button1Fragment extends Fragment
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
             {
                 //밑에 내비바클릭한것과 같이 동작 하면 댐
-            Bundle bundle = new Bundle();
-            bundle.putString("line", myAdapter.getItem(position).getFac_line());
+            bundle_line= new Bundle();
+            bundle_line.putString("line", myAdapter.getItem(position).getFac_line());
             btn2Fragment = new button2Fragment();
-            btn2Fragment.setArguments(bundle);
-//            Navigation.findNavController(view).navigate(R.id.action_navigation_btn1_to_navigation_btn2,bundle);//요건 해당 화면에서 새화면넘어갈때 사용함
-                MainActivity mainActivity = new MainActivity();
-                mainActivity.selected3();
+            btn2Fragment.setArguments(bundle_line);
+//            navigationView.setSelectedItemId(R.id.navigation_btn2); //프래그먼트에서 안댐.. 왜?..
+
+                NavDirections directions = new NavDirections()
+                {
+                    @Override
+                    public int getActionId()
+                    {
+                        return R.id.action_navigation_btn1_to_navigation_btn2;
+                    }
+
+                    @NonNull
+                    @Override
+                    public Bundle getArguments()
+                    {
+                        return null;
+                    }
+                };
+            Navigation.findNavController(view).navigate(directions);
                 //navigate()는 호출되면 호출대상을 스택맨위에 올려놓음
                 //navigate()로 이동되면 뒤로가기를 해야 NavController.navigateup(), NavController.popBackStack()메서드가 호출되어 스택최상단대상을 삭제 함.
                 //navigate()말고 , 버튼누른작용
+
             }
         });
 
@@ -236,6 +265,8 @@ public class button1Fragment extends Fragment
         });
 
         data_run.start();
+
+
         return view;
     }
 

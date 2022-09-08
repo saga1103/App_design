@@ -38,6 +38,13 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "io.reactivex.rxjava3:rxjava:3.0.7"
+    //http통신
+    implementation "com.squareup.retrofit2:retrofit:2.8.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.8.1" //json형태의 데이터를 다루기위한 gson라이브러리
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation("com.squareup.okhttp3:logging-interceptor:3.11.0")
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

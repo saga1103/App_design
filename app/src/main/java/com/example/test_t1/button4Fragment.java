@@ -74,6 +74,8 @@ public class button4Fragment extends Fragment {
     ArrayList<issue_data> issueDataList;
     int i =0;
 
+    private MainActivity mainActivity;
+
 
     @Nullable
     @Override
@@ -114,6 +116,9 @@ public class button4Fragment extends Fragment {
         final ImageView expanded_f2_b_ImageView =  (ImageView) view.findViewById(R.id.imageView_F2_Blue);
         final TextView expanded_text = (TextView) view.findViewById(R.id.textView);
 
+        mainActivity = new MainActivity();
+
+        //
         i=0;
         issueDataList = new ArrayList<issue_data>();
         chart = (LineChart) view.findViewById(R.id.data_chart);
@@ -210,6 +215,7 @@ public class button4Fragment extends Fragment {
                 zoomImageFromThumb(fac_view3,expendedfac); //해당 이미지로 바꾼다.
                 expanded_text.setText("A3공장설비");
 
+
             }
         });
 
@@ -229,12 +235,10 @@ public class button4Fragment extends Fragment {
             addEntry(1);
             addEntry(2);
         }
-
         return view;
     }
 
     public void addEntry(double num) {
-
         LineData data = chart.getData();
 
         if (data == null) {
@@ -362,10 +366,17 @@ public class button4Fragment extends Fragment {
         // the expanded image.
         final float startScaleFinal = startScale;
 
+
+
          //expeded_img.setOnClickListener(new View.OnClickListener() { //확장된 이미지를 누르면
         back_button.setOnClickListener(new View.OnClickListener() { //확장된 이미지를 누르면
             @Override
             public void onClick(View view) {
+
+
+                System.out.println("현재 전체숫자: "+mainActivity.get_inter_num());
+
+
                 if (currentAnimator != null)
                 {
                     currentAnimator.cancel();
