@@ -75,6 +75,7 @@ public class button1Fragment extends Fragment
     Bundle bundle_line;
 
 
+
     @Override
     public void onStop()
     {
@@ -90,10 +91,8 @@ public class button1Fragment extends Fragment
                              ViewGroup container, Bundle savedInstanceState)
     {
 
-
         mainActivity= new MainActivity();
         issueDataList = new ArrayList<issue_data>();
-
         i=0;
         if(getArguments() != null)
         {
@@ -110,10 +109,10 @@ public class button1Fragment extends Fragment
         listView.setAdapter(myAdapter);
         Read_csv read_csv = new Read_csv();
 
-        String path ="/data/user/0/com.example.test_t1/files/sample1.csv"; //애뮬레이터 경로 이건 해당파일이 없어서나는오류 ,이거폰에서 파일넣을방법이 없는듯 엑세스가 안댐
+//       String path ="/data/user/0/com.example.test_t1/files/sample1.csv"; //애뮬레이터 경로 이건 해당파일이 없어서나는오류 ,이거폰에서 파일넣을방법이 없는듯 엑세스가 안댐
         // 휴대폰 경로
 //        String path ="/storage/emulated/0/Download/KakaoTalk/sample1.csv"; //그냥 매니패스트파일에서 선언제대로 안해서 생긴오류..
-//        String path = "/storage/emulated/0/Android/media/sample1.csv";
+        String path = "/storage/emulated/0/Android/media/sample1.csv";
 
         csv_list = read_csv.readCSV(path);
 

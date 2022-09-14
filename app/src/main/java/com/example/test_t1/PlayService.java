@@ -1,7 +1,11 @@
 package com.example.test_t1;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.IBinder;
 import android.telecom.Call;
 import android.view.textclassifier.TextLinks;
@@ -21,6 +25,8 @@ import okhttp3.Response;
 
 public class PlayService extends Service
 {
+    Handler handler = new Handler();
+
     public PlayService()
     {
         System.out.println("생성자 생성");
@@ -29,57 +35,21 @@ public class PlayService extends Service
     @Override
     public void onCreate() {
         super.onCreate();
-
+        registerReceiver(receiver, new IntentFilter("com.example.PLAY_TO_SERVICE"));
+        Intent intent = new Intent("com.example.PLAY_TO_SERVICE");
+        intent.putExtra("mode","start");
+        sendBroadcast(intent);
     }
 
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        new Thread(new Runnable()
-        {
-            int num=0;
-            @Override
-            public void run()
-            {
-                //실행할 코드 작성
-//                String id = "";
-//                OkHttpClient client =new OkHttpClient();
-//                RequestBody body = new FormBody.Builder().add("Id",id).build();
-//
-//                Request request = new Request.Builder().url(" ").post(body).build();
-//
-////                client.newCall(request).enqueue(callback);
-//                client.newCall(request).execute();
-                try
-                {
-                    URL text = new URL(" ");
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) text.openConnection();
+        System.out.println("playservice동작");
+        //서버 동작부분
 
-                    BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"UTF-8"));
-                    StringBuffer sb= new StringBuffer();
-                    String inputLine;
-
-                    while((inputLine =in.readLine()) !=null)
-                    {
-                        sb.append(inputLine);
-                    }
-
-                    String result = sb.toString();
-                }
-                catch (Exception e)
-                {
-
-                }
-
-
-
-
-            }
-        }).start();
 
         return super.onStartCommand(intent, flags, startId);
-
     }
 
 
@@ -90,6 +60,69 @@ public class PlayService extends Service
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+
+    BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            String mode = intent.getStringExtra("mode"); //extra에담긴 값을가져와서 그에 맞는 실행을 함
+            if(mode !=null)
+            {
+                if(mode.equals("start"))
+                {
+                   System.out.println("리시버 동작");
+                    new Thread(new Runnable()
+                    {
+                        int num=0;
+                        @Override
+                        public void run()
+                        {
+                            try
+                            {
+//                                URL text = new URL("https://localhost:8080/");
+                                URL text = new URL("https://m.naver.com/");
+                                HttpURLConnection conn = (HttpURLConnection) text.openConnection();
+                                if(conn != null)
+                                {
+                                    conn.setConnectTimeout(3 *1000);
+                                    conn.setRequestMethod("GET");
+                                    conn.setDoInput(true);
+                                    conn.setDoOutput(true);
+
+                                    System.out.println("gdgd");
+                                    int resCode = conn.getResponseCode(); //여기서 안댐
+
+                                    if(resCode == HttpURLConnection.HTTP_OK)
+                                    {
+                                        System.out.println("ggd");
+                                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                        StringBuffer sb= new StringBuffer();
+                                        String inputLine = null;
+                                        while((inputLine =in.readLine()) !=null)
+                                        {
+                                            System.out.println("찾는중....");
+                                            sb.append(inputLine);
+                                        }
+                                        String result = sb.toString();
+                                        System.out.println("결과: "+result);
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
+                        }
+                    }).start();
+                }
+                else  if(mode.equals("stop"))
+                {
+
+                }
+            }
+        }
+    };
 
 
 }
